@@ -1,0 +1,187 @@
+*{
+    margin: 0;
+    font-family: "CustomFont";
+}
+@font-face {
+    font-family: "CustomFont";
+    src: url("../assets/fonts/Outfit-Medium.ttf");
+}
+.page{
+    background-image: url("../assets/images/pagebg.jpg");
+
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.cover{
+    
+    background-color: white;
+    width: 30em;
+    height: 35em;
+    position: relative;
+    border-radius: 1em;
+    box-shadow: 0 0.188em 1.550em rgb(156, 156, 156);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    
+    /*justify-content: space-evenly;
+    display: flex;
+    align-items: center;
+    flex-direction:column;
+    width: 30em;
+    height: 35em;
+    position: relative;
+    background: rgba(255, 255, 255,0.15);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8.5px);
+    border-radius: 10px;*/
+}
+.circle-btn-google{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    border: 2px solid rgb(156, 156, 156);
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    background-image: url("../assets/icons/googleicon.png");
+    background-repeat: no-repeat;
+    background-size: 40px;
+    background-position: center;
+    cursor: pointer;
+    transition: transform 0.8s ease;
+}
+.circle-btn-google:hover{
+    transform: translateY(-5px);
+    
+}
+.circle-btn-facebook{
+    border: 2px solid rgb(156, 156, 156);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    background-image: url("../assets/icons/facebookicon.png");
+    background-repeat: no-repeat;
+    background-size: 30px;
+    background-position: center;
+    cursor: pointer;
+    transition: transform 0.8s ease;
+}
+.circle-btn-facebook:hover{
+    transform: translateY(-5px);
+}
+.alt-login{
+    width: 80%;
+    height: 3em;
+    display: flex;
+    justify-content: space-around;
+}   
+
+.input-password {
+    background: url("https://w7.pngwing.com/pngs/975/821/png-transparent-password-manager-computer-icons-password-strength-password-safe-chang-miscellaneous-password-strength-password-safe-thumbnail.png") no-repeat left;
+    background-size: 15px;
+    border: none;
+    background-color: rgb(229, 226, 226);
+    height: 4em;
+    width: 80%;
+    border-radius: 0.55em;
+    text-align: center;
+    background-position: 20px center; 
+}
+
+.input-email{
+
+    background: url("https://cdn0.iconfinder.com/data/icons/cosmo-work/40/mail-512.png") no-repeat left;
+    background-size: 20px;
+    border: none;
+    background-color: rgb(229, 226, 226);
+    height: 4em;
+    width: 80%;
+    border-radius: 0.55em;
+    text-align: center;
+    background-position: 20px center;
+}
+input:focus{
+    outline-color: rgb(32, 177, 255);
+}
+input:hover{
+    border: 2px solid rgb(32, 177, 255);
+}
+.login-btn{
+    width: 40%;
+    height: 3em;
+    background-color: rgb(32, 177, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    border-radius: 0.25em;
+    cursor: pointer;
+}
+.login-btn:hover{
+    transform: scale(1.10);
+}
+.text{
+    color: rgb(141, 141, 141);
+    
+    bottom: -2em;
+}
+.hide{
+    position: absolute;
+    transform: scale(0);
+}
+.login-popup{
+    position: absolute;
+    height: 30em;
+    width: 30em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.25em;
+    background-color: black;
+    color: white;
+    bottom: 0;
+    transform: scale(1);
+    transition: 1.5s;
+}
+.dont-have-an-account-container{
+    display: flex;
+    flex-direction: row;
+}
+.spacer{
+    width: 5px;
+}
+.sign-up-button{
+    color: navy;
+}
+.sign-up-button:hover{
+    cursor: pointer;
+    border-bottom: 2px solid navy;
+    color: navy;
+}
+.password-toggle-icon{
+    position: absolute;
+    top:34.9%; 
+    right: 60px;
+    transform: translateY(-50%); 
+    cursor: pointer;
+}
+.re-password-toggle-icon{
+    position: absolute;
+    top: 49.5%; 
+    right: 60px; 
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.password-toggle-icon-login{
+    position: absolute;
+    top:40%; 
+    right: 60px;
+    transform: translateY(-50%); 
+    cursor: pointer;
+}
