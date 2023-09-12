@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.backend_sign_in_sign_up.sign_in_up_restapi.exception.EmailAlreadyInUseException;
 import com.backend_sign_in_sign_up.sign_in_up_restapi.exception.ResourceNotFoundException;
 import com.backend_sign_in_sign_up.sign_in_up_restapi.model.Users;
 import com.backend_sign_in_sign_up.sign_in_up_restapi.repository.UsersRepository;
@@ -23,7 +24,19 @@ public class UsersServiceImpl implements UsersService{
 
     @Override
     public Users saveUser(Users user) {
-        return usersRepository.save(user);
+
+        if (isEmailAlreadyInUse(user.getEmail())) {
+            throw new EmailAlreadyInUseException("Bu e-posta adresi zaten kullanımda.","email",user.getEmail());
+            
+        }else{
+            return usersRepository.save(user);
+        }
+        
+        
+    }
+    private boolean isEmailAlreadyInUse(String email) {
+        Users existingUser = usersRepository.findByEmail(email);
+        return existingUser != null;
     }
 
     @Override
