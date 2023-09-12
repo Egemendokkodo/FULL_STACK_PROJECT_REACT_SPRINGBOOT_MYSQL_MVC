@@ -2,6 +2,10 @@
 import {useNavigate} from "react-router-dom"
 import React, { useState } from 'react'
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons"
+
+
+
+
 const SignUpPage=() =>{
     const navigate=useNavigate()
 
@@ -9,7 +13,7 @@ const SignUpPage=() =>{
     const [email, setEmail] = useState("");
     const [rePassword, setRePassword] = useState("")
     const [visible, setVisible] = useState(false);
-  
+
    
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -17,16 +21,44 @@ const SignUpPage=() =>{
         const data={email,password}
         console.log(data)
 
-        fetch("http://localhost:8080/api/users", {
+
+        if (email=="" || password == "") {
+            alert("please input all the required fields.")
+        } else {
+            fetch("http://localhost:8080/api/users", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(data)
-        }).then(() => {
-            console.log("new user added")
-        } )
+        }).then((response) => {
+            if (!response.ok) {
+
+                return response.text().then((errorMessage) => {
+                    throw new Error(errorMessage)
+                });
+            }else{
+                return response.json()
+            }
+            
+        } ).then(() => {
+            alert("You have successfully signed up.")
+            
+        })
+        .catch((error) => {
+            if (error.message.includes("already in use")) {
+                alert("Email already in use")
+            } else {
+                
+                console.error("An error occurred:", error);
+            }
+        });
+        }
+
+
+
+        
 
     }
-
+    
     return(
 
         <div className="page">
@@ -83,7 +115,7 @@ const SignUpPage=() =>{
 
             
             </form>
-            
+
 
 
 
