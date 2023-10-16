@@ -5,8 +5,11 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.backend_sign_in_sign_up.sign_in_up_restapi.DTO.LoginDTO;
 import com.backend_sign_in_sign_up.sign_in_up_restapi.exception.EmailAlreadyInUseException;
+import com.backend_sign_in_sign_up.sign_in_up_restapi.exception.EmailNotFoundException;
 import com.backend_sign_in_sign_up.sign_in_up_restapi.exception.ResourceNotFoundException;
+import com.backend_sign_in_sign_up.sign_in_up_restapi.message.LoginMesage;
 import com.backend_sign_in_sign_up.sign_in_up_restapi.model.Users;
 import com.backend_sign_in_sign_up.sign_in_up_restapi.repository.UsersRepository;
 import com.backend_sign_in_sign_up.sign_in_up_restapi.service.UsersService;
@@ -36,8 +39,27 @@ public class UsersServiceImpl implements UsersService{
     }
     private boolean isEmailAlreadyInUse(String email) {
         Users existingUser = usersRepository.findByEmail(email);
+        
         return existingUser != null;
     }
+    /*@Override
+    public String loginUser(Users user) {
+
+        
+
+        if(isEmailAlreadyInUse(user.getEmail())){
+            Users existingUser = usersRepository.findByEmail(user.getEmail());
+            if(existingUser.getPassword().equals(user.getPassword())){
+                return "successfully logged in.";
+            }else{
+                return "email or password is incorrect.";
+            }
+            
+        }else{
+            throw new EmailNotFoundException("E-mail not found.","email",user.getEmail());
+            
+        }
+    }*/
 
     @Override
     public Users getUserById(long id) {
@@ -66,5 +88,31 @@ public class UsersServiceImpl implements UsersService{
         usersRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "Id", id));
         usersRepository.deleteById(id);
     }
+
+
+    @Override
+    public LoginMesage loginUser(LoginDTO loginDTO) {
+        Users user1=usersRepository.findByEmail(loginDTO.getEmail());
+        if(user1 != null ){
+            String password = loginDTO.getPassword();
+            Boolean isPwdRight= loginDTO.getPassword().equals(user1.getPassword());     
+            if(isPwdRight){
+                Optional<Users> user=usersRepository.findByEmailAndPassword(loginDTO.getEmail(), password);
+                if(user.isPresent()){
+                    return new LoginMesage("Login Success", true);
+                }else{
+                    return new LoginMesage("Login Failed", false);
+                }
+            }     else{
+                return new LoginMesage("Password is incorrect", false);
+            }
+        }else{
+            return new LoginMesage("Email does not exists", false);
+        }
+
+    }
+
+
+   
     
 }

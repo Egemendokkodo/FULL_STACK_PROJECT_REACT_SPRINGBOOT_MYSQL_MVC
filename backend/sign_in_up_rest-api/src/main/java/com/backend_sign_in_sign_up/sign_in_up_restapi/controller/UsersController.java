@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend_sign_in_sign_up.sign_in_up_restapi.DTO.LoginDTO;
+import com.backend_sign_in_sign_up.sign_in_up_restapi.message.LoginMesage;
 import com.backend_sign_in_sign_up.sign_in_up_restapi.model.Users;
 import com.backend_sign_in_sign_up.sign_in_up_restapi.service.UsersService;
 
@@ -32,12 +34,20 @@ public class UsersController{
 
     @PostMapping
     public ResponseEntity<Users> saveUser(@RequestBody Users user) {
-       
-        
-        
-        
-        
+    
         return new ResponseEntity<>(usersService.saveUser(user),HttpStatus.CREATED); 
+    }
+
+    @PostMapping(path = "/login")
+    public ResponseEntity<?> loginUser(@RequestBody LoginDTO loginDTO){
+
+
+        
+
+
+
+        LoginMesage loginResponse = usersService.loginUser(loginDTO);
+        return ResponseEntity.ok(loginResponse);
     }
 
    

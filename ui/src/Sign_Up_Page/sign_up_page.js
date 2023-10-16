@@ -19,39 +19,46 @@ const SignUpPage=() =>{
         e.preventDefault();
         
         const data={email,password}
-        console.log(data)
+        console.log("Kullanıcının girdiği veriler: ",data)
 
-
-        if (email=="" || password == "") {
-            alert("please input all the required fields.")
-        } else {
-            fetch("http://localhost:8080/api/users", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(data)
-        }).then((response) => {
-            if (!response.ok) {
-
-                return response.text().then((errorMessage) => {
-                    throw new Error(errorMessage)
-                });
-            }else{
-                return response.json()
-            }
-            
-        } ).then(() => {
-            alert("You have successfully signed up.")
-            
-        })
-        .catch((error) => {
-            if (error.message.includes("already in use")) {
-                alert("Email already in use")
-            } else {
-                
-                console.error("An error occurred:", error);
-            }
-        });
+        if (rePassword != password) {
+            alert("Passwords does not match.")
         }
+        else if (email=="" || password == "") {
+            alert("please input all the required fields.")
+        }
+        else{
+            
+                fetch("http://localhost:8080/api/users", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(data)
+            }).then((response) => {
+                if (!response.ok) {
+    
+                    return response.text().then((errorMessage) => {
+                        throw new Error(errorMessage)
+                    });
+                }else{
+                    return response.json()
+                }
+                
+            } ).then(() => {
+                alert("You have successfully signed up.")
+                
+            })
+            .catch((error) => {
+                
+                if (error.message.includes("already in use")) {
+                    alert("Email already in use")
+                } else {
+                    
+                    console.error("An error occurred:", error);
+                }
+            });
+            
+        }
+        
 
 
 
@@ -85,14 +92,7 @@ const SignUpPage=() =>{
                     }
             </div>
             
-            
-            
-            
-            
 
-            
-
-            
 
             <div onClick={handleSubmit} className='login-btn' >Sign Up</div>
             
@@ -118,20 +118,9 @@ const SignUpPage=() =>{
 
 
 
-
-
-
         </div>
 
 
-
-
-
-
-
-
-
-        
     )
 }
 
